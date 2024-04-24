@@ -14,14 +14,18 @@
         <div class="container">
             <nav>
                 <img src="images/logo.png" class="logo">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Achievements</a></li>
+                <ul id="sidemenu">
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#Pprojects">Projects</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
                     <li><a href="#">Experiences</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <!-- cross icon  -->
+                    <i class="fas fa-times" onclick="closemenu()"></i> 
                 </ul>
+                <!-- menu icon -->
+                <i class="fas fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header-text">
                 <h1>Hi, I'm <span>Jai Vardhan</span></h1>
@@ -164,25 +168,35 @@
 <!-- --------conatct--------- -->
 
 <div id="contact">
-    <div class="conatiner">
-        <div class="contact-left">
-            <h1 class="sub-title">Contact me</h1>
-            <p>contact@exaMPLE.COM</p>
-            <P>1234567890</P>
-            <div class="social-icons">
-                <a href=""><i class="fa-brands fa-linkedin"></i></a>
-                <a href=""><i class="fa-brands fa-twitter"></i></a>
-                <a href=""><i class="fa-brands fa-instagram"></i></a>
+    <div class="container">
+        <div class ="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fa-regular fa-envelope"></i>contact@exaMPLE.COM</p>
+                <P><i class="fa-solid fa-phone"></i>1234567890</P>
+                <div class="social-icons">
+                    <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                    <a href=""><i class="fa-brands fa-twitter"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <!-- My Resume -->
+                <a href="images/Resume.pdf" download class="btn btn2">Download Resume</a>
+            </div>
+            <!-- Contact form -->
+            <div class="contact-right">
+                <form name = "submit-to-google-sheet" >
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="E-mail" placeholder="Your E-mail" required>
+                    <textarea name="Message"  rows="10" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id ="msg"></span>
             </div>
         </div>
-        <div class="contact-right">
-            <form action="">
-                <input type="text" name="Name" placeholder="Your Name" required>
-                <input type="email" name="E-mail" placeholder="Your E-mail" required>
-                <textarea name="Message"  rows="10" placeholder="Your Message"></textarea>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+    </div>
+    <!-- Copyright -->
+    <div class="copyright">
+        <p>Copyright © Jai Vardhan. Made with <i class="fa-solid fa-heart"></i> by Jai</p>
     </div>
 </div>
 
@@ -202,7 +216,39 @@
             document.getElementById(tabname).classList.add("active-tab");
         }
     </script>
+
+    <!-- Java script for Sections(like home,project on top) in mobile view -->
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+
+        function openmenu(){
+            sidemenu.style.right = "0";
+        }
+        function closemenu(){
+            sidemenu.style.right="-200px";
+        }
+
+    </script>
     
+    <!-- -----Google form ressponses for contact us---- -->
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwmAaEIy244TPWyqMYUYJ1VDe9CcuX0ntOs5D8izc4l9OF9ygMm9VsaCFroTRIsXMTa/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Lets Connect Soon😊"
+                setTimeout(function(){
+                    msg.innerHTML = ""
+                },5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
 
 </body>
 
