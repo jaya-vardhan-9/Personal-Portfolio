@@ -19,7 +19,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#Pprojects">Projects</a></li>
                     <li><a href="#achievements">Achievements</a></li>
-                    <li><a href="#">Experiences</a></li>
+                    <li><a>Experiences</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <!-- cross icon  -->
                     <i class="fas fa-times" onclick="closemenu()"></i> 
@@ -223,9 +223,11 @@
 
         function openmenu(){
             sidemenu.style.right = "0";
+            sidemenu.classList.add("show");
         }
         function closemenu(){
             sidemenu.style.right="-200px";
+            sidemenu.classList.remove("show");
         }
 
     </script>
