@@ -29,7 +29,7 @@
             </nav>
             <div class="header-text">
                 <h1>Hi, I'm <span>Jai Vardhan</span></h1>
-                <p>Cyber Security Engineer</p>
+                <p><span class="typing"></span></p>
             </div>
         </div>
     </div>
@@ -250,6 +250,41 @@
             })
             .catch(error => console.error('Error!', error.message))
         })
+
+        const roles = ["AWS Solution Architect", "Cyber Security Engineer", "DevOps Engineer"];
+let currentRoleIndex = 0;
+let currentCharIndex = 0;
+const typingElement = document.querySelector('.typing');
+const typingSpeed = 150; // Speed of typing
+const pauseBetweenRoles = 1000; // Pause before starting to erase
+const erasingSpeed = 50; // Speed of erasing
+
+function type() {
+    if (currentCharIndex < roles[currentRoleIndex].length) {
+        typingElement.textContent += roles[currentRoleIndex].charAt(currentCharIndex);
+        currentCharIndex++;
+        setTimeout(type, typingSpeed);
+    } else {
+        setTimeout(erase, pauseBetweenRoles); // Delay before erasing
+    }
+}
+
+function erase() {
+    if (currentCharIndex > 0) {
+        typingElement.textContent = roles[currentRoleIndex].substring(0, currentCharIndex - 1);
+        currentCharIndex--;
+        setTimeout(erase, erasingSpeed);
+    } else {
+        currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+        setTimeout(type, typingSpeed);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(type, typingSpeed);
+});
+
+
       </script>
 
 </body>
